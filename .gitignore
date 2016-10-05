@@ -1,5 +1,7 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+**/__pycache__/**
+**/*.pyc
+**/*.bak
 *.py[cod]
 *$py.class
 
@@ -7,9 +9,15 @@ __pycache__/
 *.so
 
 #pycharm and osx
-.DS_Store
-.idea/
-.idea/*
+**/.idea/
+**/nbproject
+**/.~lock.*
+**/.buildpath
+**/.DS_Store
+**/.idea
+**/.project
+**/*.log
+**/*.log.*
 
 # Distribution / packaging
 .Python
