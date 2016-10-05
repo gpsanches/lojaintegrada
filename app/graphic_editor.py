@@ -7,6 +7,7 @@ class GraphicEditor(object):
 
     array = []
     COMMANDS = ["I", "C", "L", "V", "H", "K", "F", "S", "X"]
+    out = []
 
     def create_array(self, w, h):
         """
@@ -15,7 +16,7 @@ class GraphicEditor(object):
         :param h:
         :return:
         """
-        self.array = [[0 for i in range(w)] for c in range(h)]
+        self.array = [[0 for i in range(int(w))] for c in range(int(h))]
 
         return self.array
 
@@ -25,8 +26,8 @@ class GraphicEditor(object):
         :param array:
         :return: w int, h int
         """
-        w = self.array.__len__()
-        h = self.array[0].__len__()
+        w = int(self.array.__len__())
+        h = int(self.array[0].__len__())
 
         return w, h
 
@@ -53,7 +54,16 @@ class GraphicEditor(object):
         :param color:
         :return:
         """
-        self.array[x][y] = color
+        x = int(x)
+        y = int(y)
+
+        if x != 0:
+            x = x - 1
+
+        if y != 0:
+            y = y - 1
+
+        self.array[y][x] = color
 
         return self.array
 
@@ -65,3 +75,33 @@ class GraphicEditor(object):
         w, h = self.size_array()
 
         return self.create_array(w, h)
+
+
+def main():
+    table = GraphicEditor()
+
+    while True:
+        choice = input("Insert the command > ")
+
+        commands = choice.split(' ')
+        command = commands[0]
+
+        if not command.upper() in GraphicEditor.COMMANDS:
+            continue
+
+        elif command.upper() == 'I' and commands.__len__() == 3:
+            table.create_array(commands[1], commands[2])
+            print(table.show_formatted_array())
+
+        elif command.upper() == 'L' and commands.__len__() == 4:
+            table.paints_coordinated(commands[1], commands[2], commands[3])
+            print(table.show_formatted_array())
+
+        elif command.upper() == 'X' and commands.__len__() == 1:
+            print
+            "Bye Bye"
+
+            break
+
+if __name__ == '__main__':
+    main()
