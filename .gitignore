@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 **/__pycache__/**
+**/__pycache__/
 **/*.pyc
 **/*.bak
 *.py[cod]
@@ -8,7 +9,7 @@
 # C extensions
 *.so
 
-#pycharm and osx
+#pycharm ,osx and logs
 **/.idea/
 **/nbproject
 **/.~lock.*
