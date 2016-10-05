@@ -6,6 +6,7 @@ from prettytable import PrettyTable
 class GraphicEditor(object):
 
     array = []
+    COMMANDS = ["I", "C", "L", "V", "H", "K", "F", "S", "X"]
 
     def create_array(self, w, h):
         """
@@ -45,8 +46,22 @@ class GraphicEditor(object):
         return table
 
     def paints_coordinated(self, x, y, color):
+        """
+        Paints a coordinated with the color
+        :param x:
+        :param y:
+        :param color:
+        :return:
+        """
         self.array[x][y] = color
 
         return self.array
 
+    def clear_array(self):
+        """
+        Get current array and clean
+        :return: array
+        """
+        w, h = self.size_array()
 
+        return self.create_array(w, h)

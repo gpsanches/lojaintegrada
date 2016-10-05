@@ -6,8 +6,6 @@ from app.graphic_editor import GraphicEditor
 
 class Tdd(unittest.TestCase):
 
-    COMMANDS = ["I", "C", "L", "V", "H", "K", "F", "S", "X"]
-
     def setUp(self):
         self.array = GraphicEditor()
 
@@ -23,8 +21,24 @@ class Tdd(unittest.TestCase):
         self.assertEqual(10, w)
         self.assertEqual(8, h)
 
-    # def test_clean_array(self):
-    #     pass
+    def test_create_array(self):
+        array = self.array.create_array(2, 2)
+
+        self.assertIsNotNone(array)
+
+    def test_clean_array(self):
+        array = self.array.create_array(3, 3)
+        array_size = self.array.size_array()
+        self.array.paints_coordinated(0, 0, 'A')
+        self.array.paints_coordinated(1, 0, 'A')
+        self.array.paints_coordinated(2, 0, 'A')
+        array_clear = self.array.clear_array()
+        array_clear_size = self.array.size_array()
+
+        self.assertEqual(0, array_clear[0][0])
+        self.assertEqual(0, array_clear[1][0])
+        self.assertEqual(0, array_clear[2][0])
+        self.assertEqual(array_size, array_clear_size)
 
     def test_paints_a_coordinated(self):
         self.array.create_array(2, 2)
