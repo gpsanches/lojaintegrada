@@ -7,7 +7,7 @@ class GraphicEditor(object):
 
     array = []
     COMMANDS = ["I", "C", "L", "V", "H", "K", "F", "S", "X"]
-    out = []
+    out = {}
 
     def create_array(self, w, h):
         """
@@ -54,9 +54,11 @@ class GraphicEditor(object):
         :param color:
         :return:
         """
+        # casting to int
         x = int(x)
         y = int(y)
 
+        # sample start with 1
         if x != 0:
             x = x - 1
 
@@ -76,8 +78,16 @@ class GraphicEditor(object):
 
         return self.create_array(w, h)
 
+    def named_array(self, name):
+        self.out[name] = self.array
+        self.clear_array()
+
 
 def main():
+    """
+    start the app
+    :return:
+    """
     table = GraphicEditor()
 
     while True:
@@ -97,10 +107,17 @@ def main():
             table.paints_coordinated(commands[1], commands[2], commands[3])
             print(table.show_formatted_array())
 
-        elif command.upper() == 'X' and commands.__len__() == 1:
-            print
-            "Bye Bye"
+        elif command.upper() == 'S' and commands.__len__() == 2:
+            table.named_array(commands[1])
+            print(commands[1])
+            print(table.show_formatted_array())
 
+        elif command.upper() == 'X' and commands.__len__() == 1:
+            for name, data in table.out.items():
+                print(name)
+                print(table.show_formatted_array(data))
+
+            print("Bye Bye see you son!")
             break
 
 if __name__ == '__main__':

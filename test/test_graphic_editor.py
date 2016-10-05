@@ -27,7 +27,7 @@ class Tdd(unittest.TestCase):
         self.assertIsNotNone(array)
 
     def test_clean_array(self):
-        array = self.array.create_array(3, 3)
+        self.array.create_array(3, 3)
         array_size = self.array.size_array()
         self.array.paints_coordinated(0, 0, 'A')
         self.array.paints_coordinated(1, 0, 'A')
@@ -42,12 +42,24 @@ class Tdd(unittest.TestCase):
 
     def test_paints_a_coordinated(self):
         self.array.create_array(2, 2)
-        array = self.array.paints_coordinated(1, 1, 'C')
+        array = self.array.paints_coordinated(2, 2, 'C')
 
         self.assertEqual(0, array[0][0])
         self.assertEqual(0, array[0][1])
         self.assertEqual(0, array[1][0])
         self.assertEqual('C', array[1][1])
+
+    def test_array_name(self):
+        self.assertEqual([], self.array.array)
+        self.array.create_array(3, 4)
+        self.assertIsNotNone(self.array.array)
+        self.assertEqual({}, self.array.out)
+        self.array.paints_coordinated(2, 3, 'A')
+        self.array.named_array('guilherme.bmp')
+
+        for i in self.array.array:
+            for j in i:
+                self.assertEqual(0, j)
 
 
 if __name__ == '__main__':
