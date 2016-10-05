@@ -29,17 +29,24 @@ class GraphicEditor(object):
 
         return w, h
 
-    def show_formatted_array(self):
+    def show_formatted_array(self, array=None):
         """
         Convert list in formatted table
         :return: formatted table
         """
+        if not array:
+            array = self.array
 
         table = PrettyTable()
 
-        for line in self.array:
+        for line in array:
             table.add_row(line)
 
         return table
+
+    def paints_coordinated(self, x, y, color):
+        self.array[x][y] = color
+
+        return self.array
 
 
