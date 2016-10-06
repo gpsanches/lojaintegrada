@@ -93,6 +93,13 @@ class GraphicEditor(object):
                     if int(y1) <= idx2 <= int(y2):
                         self.paints_coordinated(idx, idx2, color)
 
+    def drawing_horizontal(self, x1, x2, y, color):
+        for idx, i in enumerate(self.array):
+            if idx == int(y):
+                for idx2, i2 in enumerate(i):
+                    if int(x1) <= idx2 <= int(x2):
+                        self.paints_coordinated(idx2, idx, color)
+
 
 def main():
     """
@@ -124,6 +131,10 @@ def main():
 
         elif command.upper() == 'V' and commands.__len__() == 5:
             table.drawing_vertical(commands[1], commands[2], commands[3], commands[4])
+            print(table.show_formatted_array())
+
+        elif command.upper() == 'H' and commands.__len__() == 5:
+            table.drawing_horizontal(commands[1], commands[2], commands[3], commands[4])
             print(table.show_formatted_array())
 
         elif command.upper() == 'S' and commands.__len__() == 2:

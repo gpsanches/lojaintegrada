@@ -85,5 +85,24 @@ class Tdd(unittest.TestCase):
                     else:
                         self.assertEqual(1, j2)
 
+    def test_drawing_horizontal(self):
+        array = self.array.create_array(4, 4)
+
+        for i in array:
+            for j in i:
+                self.assertEqual(0, j)
+
+        w, h = self.array.size_array()
+
+        self.array.drawing_horizontal(0, 4, 0, 'P')
+
+        for idx2, i2 in enumerate(self.array.array):
+            if idx2 == 0:
+                for j2 in i2:
+                    self.assertEqual('P', j2)
+            else:
+                self.assertEqual(0, i2)
+
+
 if __name__ == '__main__':
     unittest.main()
