@@ -138,6 +138,14 @@ class GraphicEditor(object):
                         self.paints_coordinated(idx2, idx, color)
 
     def drawing_area(self, x, y, color):
+        """
+        Prepare data to fill area
+        :param x:
+        :param y:
+        :param color:
+        :return:
+        """
+
         x = int(x) - 1
         y = int(y) - 1
         color = color.upper()
@@ -150,6 +158,15 @@ class GraphicEditor(object):
 
     @staticmethod
     def flood_fill(array, x, y, color, old_color=None):
+        """
+        Fill the area
+        :param array:
+        :param x:
+        :param y:
+        :param color:
+        :param old_color:
+        :return:
+        """
         width = len(array[0]) - 1
         height = len(array) - 1
 
