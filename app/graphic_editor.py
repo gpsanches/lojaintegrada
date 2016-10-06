@@ -137,6 +137,49 @@ class GraphicEditor(object):
                     if int(x1) <= idx2 <= int(y1):
                         self.paints_coordinated(idx2, idx, color)
 
+    def drawing_area(self, x, y, color):
+        x = int(x) - 1
+        y = int(y) - 1
+        color = color.upper()
+
+        new_array = GraphicEditor.flood_fill(self.array, x, y, color)
+
+        self.array = new_array
+
+        return self.array
+
+    @staticmethod
+    def flood_fill(array, x, y, color, old_color=None):
+        width = len(array[0]) - 1
+        height = len(array) - 1
+
+        if old_color == None:
+            old_color = array[x][y]
+
+        if array[x][y] != old_color:
+            # Base case. If the current x, y character is not the old_color,
+            # then do nothing.
+            return
+
+        # Change the character at array[x][y] to color
+        array[x][y] = color
+
+        # Recursive calls. Make a recursive call as long as we are not on the
+        # boundary (which would cause an Index Error.)
+        if y > 0:  # left
+            GraphicEditor.flood_fill(array, x, y - 1, color, old_color)
+
+        if x > 0:  # up
+            GraphicEditor.flood_fill(array, x - 1, y, color, old_color)
+
+        if y < width:  # right
+            GraphicEditor.flood_fill(array, x, y + 1, color, old_color)
+
+        if x < height:  # down
+            GraphicEditor.flood_fill(array, x + 1, y, color, old_color)
+
+        return array
+
 
 def main():
     """
@@ -156,32 +199,27 @@ def main():
 
         elif command.upper() == 'I' and commands.__len__() == 3:
             table.create_array(commands[1], commands[2])
-            print(table.show_formatted_array())
 
         elif command.upper() == 'C' and commands.__len__() == 1:
             table.clear_array()
-            print(table.show_formatted_array())
 
         elif command.upper() == 'L' and commands.__len__() == 4:
             table.paints_coordinated(commands[1], commands[2], commands[3])
-            print(table.show_formatted_array())
 
         elif command.upper() == 'V' and commands.__len__() == 5:
             table.drawing_vertical(commands[1], commands[2], commands[3], commands[4])
-            print(table.show_formatted_array())
 
         elif command.upper() == 'H' and commands.__len__() == 5:
             table.drawing_horizontal(commands[1], commands[2], commands[3], commands[4])
-            print(table.show_formatted_array())
 
         elif command.upper() == 'K' and commands.__len__() == 6:
             table.drawing_rectangle(commands[1], commands[2], commands[3], commands[4], commands[5])
-            print(table.show_formatted_array())
+
+        elif command.upper() == 'F' and commands.__len__() == 4:
+            table.drawing_area(commands[1], commands[2], commands[3])
 
         elif command.upper() == 'S' and commands.__len__() == 2:
             table.named_array(commands[1])
-            print(commands[1])
-            print(table.show_formatted_array())
 
         elif command.upper() == 'X' and commands.__len__() == 1:
             for name, data in table.out.items():

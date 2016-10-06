@@ -114,6 +114,19 @@ class Tdd(unittest.TestCase):
                     else:
                         self.assertEqual(0, i2)
 
+    def test_drawing_area(self):
+        self.array.create_array(3, 5)
+        self.array.drawing_horizontal(1, 3, 3, 'Z')
+        self.array.drawing_area(1, 1, 'U')
+
+        for idx, i in enumerate(self.array.array, start=1):
+            for idx2, i2 in enumerate(i, start=1):
+                if idx in [1, 2]:
+                    self.assertEqual('U', i2)
+                elif idx == 3:
+                    self.assertEqual('Z', i2)
+                else:
+                    self.assertEqual(0, i2)
 
 if __name__ == '__main__':
     unittest.main()
