@@ -51,7 +51,7 @@ class Tdd(unittest.TestCase):
 
     def test_array_name(self):
         self.assertEqual([], self.array.array)
-        old = self.array.create_array(3, 4)
+        self.array.create_array(3, 4)
         old_size = self.array.size_array()
         self.assertIsNotNone(self.array.array)
         self.assertEqual({}, self.array.out)
@@ -62,7 +62,6 @@ class Tdd(unittest.TestCase):
             for j in i:
                 self.assertEqual(0, j)
 
-        new = self.array.array
         new_size = self.array.size_array()
         self.assertEqual(old_size, new_size)
 
@@ -75,18 +74,18 @@ class Tdd(unittest.TestCase):
 
         w, h = self.array.size_array()
 
-        self.array.drawing_vertical(0, 0, h, 'g')
+        self.array.drawing_vertical(1, 5, h, 'g')
 
         for i2 in self.array.array:
-            if i2 == 0:
+            if i2 == 1:
                 for j2 in i2:
-                    if 0 == j2 >= h:
+                    if 1 == j2 >= h:
                         self.assertEqual('G', j2)
                     else:
                         self.assertEqual(1, j2)
 
     def test_drawing_horizontal(self):
-        array = self.array.create_array(4, 4)
+        array = self.array.create_array(4, 5)
 
         for i in array:
             for j in i:
@@ -94,14 +93,14 @@ class Tdd(unittest.TestCase):
 
         w, h = self.array.size_array()
 
-        self.array.drawing_horizontal(0, 4, 0, 'P')
+        self.array.drawing_horizontal(1, w, 1, 'P')
 
-        for idx2, i2 in enumerate(self.array.array):
-            if idx2 == 0:
-                for j2 in i2:
+        for idx2, i2 in enumerate(self.array.array, start=1):
+            for j2 in i2:
+                if idx2 == 1:
                     self.assertEqual('P', j2)
-            else:
-                self.assertEqual(0, i2)
+                else:
+                    self.assertEqual(0, j2)
 
 
 if __name__ == '__main__':

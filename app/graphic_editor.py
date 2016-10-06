@@ -87,16 +87,16 @@ class GraphicEditor(object):
         return array
 
     def drawing_vertical(self, x, y1, y2, color):
-        for idx, i in enumerate(self.array):
+        for idx, i in enumerate(self.array, start=1):
             if idx == int(x):
-                for idx2, i2 in enumerate(i):
+                for idx2, i2 in enumerate(i, start=1):
                     if int(y1) <= idx2 <= int(y2):
                         self.paints_coordinated(idx, idx2, color)
 
     def drawing_horizontal(self, x1, x2, y, color):
-        for idx, i in enumerate(self.array):
+        for idx, i in enumerate(self.array, start=1):
             if idx == int(y):
-                for idx2, i2 in enumerate(i):
+                for idx2, i2 in enumerate(i, start=1):
                     if int(x1) <= idx2 <= int(x2):
                         self.paints_coordinated(idx2, idx, color)
 
