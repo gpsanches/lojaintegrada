@@ -9,11 +9,6 @@ class Tdd(unittest.TestCase):
     def setUp(self):
         self.array = GraphicEditor()
 
-    # def test_validate_commands(self):
-    #
-    #     result = False
-    #     self.assertTrue(result)
-
     def test_array_size(self):
         self.array.create_array(8, 10)
         w, h = self.array.size_array()
@@ -101,6 +96,23 @@ class Tdd(unittest.TestCase):
                     self.assertEqual('P', j2)
                 else:
                     self.assertEqual(0, j2)
+
+    def test_drawing_rectangle(self):
+        self.array.create_array(4, 5)
+        old_size = self.array.size_array()
+
+        self.array.drawing_rectangle(2, 2, 8, 8, 'g')
+        new_size = self.array.size_array()
+
+        self.assertEqual(old_size, new_size)
+
+        for idx, i in enumerate(self.array.array, start=1):
+            for idx2, i2 in enumerate(i, start=1):
+                if 2 <= idx <= 8:
+                    if 2 <= idx2 <= 8:
+                        self.assertEqual('G', i2)
+                    else:
+                        self.assertEqual(0, i2)
 
 
 if __name__ == '__main__':

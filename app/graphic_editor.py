@@ -81,12 +81,25 @@ class GraphicEditor(object):
         return array
 
     def named_array(self, name):
+        """
+        Create a name, clear the array and save another array to output
+        :param name:
+        :return:
+        """
         self.out[name] = self.array
         array = self.clear_array()
 
         return array
 
     def drawing_vertical(self, x, y1, y2, color):
+        """
+        Drawing line vertical
+        :param x:
+        :param y1:
+        :param y2:
+        :param color:
+        :return:
+        """
         for idx, i in enumerate(self.array, start=1):
             if idx == int(x):
                 for idx2, i2 in enumerate(i, start=1):
@@ -94,10 +107,34 @@ class GraphicEditor(object):
                         self.paints_coordinated(idx, idx2, color)
 
     def drawing_horizontal(self, x1, x2, y, color):
+        """
+        drawing line horizontal
+        :param x1:
+        :param x2:
+        :param y:
+        :param color:
+        :return:
+        """
         for idx, i in enumerate(self.array, start=1):
             if idx == int(y):
                 for idx2, i2 in enumerate(i, start=1):
                     if int(x1) <= idx2 <= int(x2):
+                        self.paints_coordinated(idx2, idx, color)
+
+    def drawing_rectangle(self, x1, x2, y1, y2, color):
+        """
+        drawing rectangle
+        :param x1:
+        :param x2:
+        :param y1:
+        :param y2:
+        :param color:
+        :return:
+        """
+        for idx, i in enumerate(self.array, start=1):
+            if int(x2) <= idx <= int(y2):
+                for idx2, i2 in enumerate(i, start=1):
+                    if int(x1) <= idx2 <= int(y1):
                         self.paints_coordinated(idx2, idx, color)
 
 
@@ -135,6 +172,10 @@ def main():
 
         elif command.upper() == 'H' and commands.__len__() == 5:
             table.drawing_horizontal(commands[1], commands[2], commands[3], commands[4])
+            print(table.show_formatted_array())
+
+        elif command.upper() == 'K' and commands.__len__() == 6:
+            table.drawing_rectangle(commands[1], commands[2], commands[3], commands[4], commands[5])
             print(table.show_formatted_array())
 
         elif command.upper() == 'S' and commands.__len__() == 2:
