@@ -18,8 +18,8 @@ class Tdd(unittest.TestCase):
         self.array.create_array(8, 10)
         w, h = self.array.size_array()
 
-        self.assertEqual(10, w)
-        self.assertEqual(8, h)
+        self.assertEqual(8, w)
+        self.assertEqual(10, h)
 
     def test_create_array(self):
         array = self.array.create_array(2, 2)
@@ -51,7 +51,8 @@ class Tdd(unittest.TestCase):
 
     def test_array_name(self):
         self.assertEqual([], self.array.array)
-        self.array.create_array(3, 4)
+        old = self.array.create_array(3, 4)
+        old_size = self.array.size_array()
         self.assertIsNotNone(self.array.array)
         self.assertEqual({}, self.array.out)
         self.array.paints_coordinated(2, 3, 'A')
@@ -61,6 +62,28 @@ class Tdd(unittest.TestCase):
             for j in i:
                 self.assertEqual(0, j)
 
+        new = self.array.array
+        new_size = self.array.size_array()
+        self.assertEqual(old_size, new_size)
+
+    def test_drawing_vertical(self):
+        array = self.array.create_array(4, 4)
+
+        for i in array:
+            for j in i:
+                self.assertEqual(0, j)
+
+        w, h = self.array.size_array()
+
+        self.array.drawing_vertical(0, 0, h, 'g')
+
+        for i2 in self.array.array:
+            if i2 == 0:
+                for j2 in i2:
+                    if 0 == j2 >= h:
+                        self.assertEqual('G', j2)
+                    else:
+                        self.assertEqual(1, j2)
 
 if __name__ == '__main__':
     unittest.main()
