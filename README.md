@@ -1,7 +1,7 @@
 # Teste lojaintegrada
 
 
-## Instalação
+## Set Up
 
     $ cd lojaintegrada
     $ virtualenv  -p /usr/bin/python3.4 env
@@ -9,7 +9,7 @@
     $ pip install -r requirements.txt
     $ python app/graphic_editor.py
     
-## Testes
+## Tests
     $ cd lojaintegrada
     $ source env/bin/activate
     $ nosetests test/test_graphic_editor.py
