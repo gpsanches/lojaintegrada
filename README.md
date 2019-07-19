@@ -1,7 +1,7 @@
 # Teste lojaintegrada
 
 ## Problem to solve
- 
+    - editor_grafico.py.txt
 ## Set Up
 
     $ cd lojaintegrada
